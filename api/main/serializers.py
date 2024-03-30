@@ -1,13 +1,9 @@
 from rest_framework import serializers
 
-from .models import TODO, Macros
+from .models import Task
 
 
-class TODOSerializer(serializer.ModelSerializer):
+class TaskSerializer(serializers.ModelSerializer):
 	class Meta:
-		model = TODO
-
- 
-class MacrosSerializer(serializer.ModelSerializer):
-	class Meta:
-		model = Macros
+		model = Task
+		fields = "__all__"
