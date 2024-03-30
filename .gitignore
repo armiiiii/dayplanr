@@ -1,3 +1,7 @@
 env/
 settings.py
+__pycache__
+db.sqlite3
+*.pyc
 
+api/api/__pycache__/settings.cpython-310.pyc
