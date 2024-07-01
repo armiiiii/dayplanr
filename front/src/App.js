@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import connector from "./fetch.js";
 
+import Day from "./ui/Day.jsx";
+
 function App() {
   const [week, setWeek] = useState([]);
 
@@ -13,7 +15,10 @@ function App() {
   }, []);
 
   return (
+    <>
+    <h1>Hello!</h1>
     <p>{week}</p>
+    </>
   );
 }
 

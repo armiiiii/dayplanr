@@ -18,5 +18,5 @@ def index(request):
         for d, day in WEEK.items():
             serializer = TaskSerializer(Task.objects.filter(day=d).order_by("order"), many=True)
             week[day] = serializer.data
-        return JsonResponse(f'{week}', safe=False)
+        return JsonResponse(f'[{week}]', safe=False)
     return JsonResponse(f"Unsupported method {request.method}", status=501)
