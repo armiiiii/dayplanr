@@ -1,7 +1,7 @@
 const connector = {
     getTasks: async () => {
-        let content = await fetch('http://localhost:8000/');
-        return await content.json();
+        const response = await fetch('http://localhost:8000');
+        return await response.json();
     },
     createTask: async (data) => {
         return 'BASTA!';

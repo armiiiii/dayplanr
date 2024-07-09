@@ -1,12 +1,12 @@
-function Task({ order, task, done }) {
+function Task({order, task, done}) {
     return (
     <div>
         <div>
             <div>
-                <p>{{ order }}</p>
+                <p>{ order }</p>
             </div>
             <div>
-                <p style={done ? "textDecoration: line-thorough;" : ""}>{{task}}</p>
+                <p>{ task }</p>
             </div>
             <div>
                 <button>Done</button>

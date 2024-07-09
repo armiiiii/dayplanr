@@ -1,3 +1,5 @@
+import json
+
 from django.http import JsonResponse
 
 from rest_framework.parsers import JSONParser
@@ -14,9 +16,16 @@ def index(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
     elif request.method == 'GET':
-        week = {}
+        week = []
+        c = 1
         for d, day in WEEK.items():
             serializer = TaskSerializer(Task.objects.filter(day=d).order_by("order"), many=True)
-            week[day] = serializer.data
-        return JsonResponse(f'[{week}]', safe=False)
+            day = {
+                "id": c,
+                "day": d,
+                "tasks": serializer.data
+            }
+            c += 1
+            week.append(day)
+        return JsonResponse(week, safe=False)
     return JsonResponse(f"Unsupported method {request.method}", status=501)

@@ -7,17 +7,23 @@ function App() {
   const [week, setWeek] = useState([]);
 
   useEffect(() => {
-    const fetchWeek = async () => {
-      const content = await connector.getTasks();
-      setWeek(content);
+    const fetchData = async () => {
+      const data = await connector.getTasks();
+      setWeek(data);
     }
-    fetchWeek();
+    fetchData();
   }, []);
 
   return (
     <>
-    <h1>Hello!</h1>
-    <p>{week}</p>
+    <header>
+      <h1>Hello!</h1>
+    </header>
+    <main>
+      {week.map(day => (
+        <Day key={day.id} day={day.day} todos={day.tasks}/>
+      ))}
+    </main>
     </>
   );
 }
