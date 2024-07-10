@@ -1,11 +1,18 @@
+import axios from 'axios';
+
+
 const connector = {
-    getTasks: async () => {
-        const response = await fetch('http://localhost:8000');
-        return await response.json();
+    getTodo: async () => {
+        const response = await axios.get('http://localhost:8000/', {withCredentials: true});
+        return response.data
     },
-    createTask: async (data) => {
+    createTodo: async (data) => {
+        const response = await axios.post('http://localhost:8000/', data, {withCredentials:true});
+        console.log(response)
+    },
+    updateTodo: async (data) => {
         return 'BASTA!';
-    },
+    }
 };
 
 export default connector;

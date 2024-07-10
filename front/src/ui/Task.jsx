@@ -1,7 +1,7 @@
 function Task({order, task, done}) {
     return (
     <div>
-        <div>
+        <div style={{display: "flex", flexDirection: 'row'}}>
             <div>
                 <p>{ order }</p>
             </div>

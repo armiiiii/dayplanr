@@ -8,7 +8,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await connector.getTasks();
+      const data = await connector.getTodo();
       setWeek(data);
     }
     fetchData();
