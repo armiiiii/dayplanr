@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import connector from "./fetch.js";
 
 import Day from "./ui/Day.jsx";
+
+import connector from "./fetch.js";
 
 function App() {
   const [week, setWeek] = useState([]);
@@ -21,7 +22,7 @@ function App() {
     </header>
     <main>
       {week.map(day => (
-        <Day key={day.id} day={day.day} todos={day.tasks}/>
+        <Day key={day.id} day={day.day} todos={day.tasks} />
       ))}
     </main>
     </>
