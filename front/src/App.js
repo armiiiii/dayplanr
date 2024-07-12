@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await connector.getTodo();
+      const data = await connector.getWeek();
       setWeek(data);
     }
     fetchData();
@@ -22,7 +22,7 @@ function App() {
     </header>
     <main>
       {week.map(day => (
-        <Day key={day.id} day={day.day} todos={day.tasks} />
+        <Day key={day.id} day={day.day} todosFetched={day.tasks} />
       ))}
     </main>
     </>
