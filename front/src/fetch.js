@@ -10,7 +10,11 @@ const connector = {
         return response.data;
     },
     updateTodo: async (data) => {
-        return 'BASTA!';
+        const response = await axios.put('http://localhost:8000/todos/', data, {withCredentials: true})
+        return response.data;
+    },
+    deleteTodo: async (id) => {
+        await axios.delete("http://localhost:8000/todos/", {"id": id}, {withCredentials: true})
     }
 };
 

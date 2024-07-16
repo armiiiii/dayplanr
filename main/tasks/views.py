@@ -22,6 +22,7 @@ def get_week(request):
 
 
 def todos_index(request):
+    print(request.META)
     DATA = JSONParser().parse(request)
     if request.method == 'POST':
         serializer = TaskSerializer(data=DATA)

@@ -28,6 +28,21 @@ function Day({ day, todosFetched }) {
         sendRequest();
     }
 
+    const deleteTodoEvent = (id) => {
+        const sendDelete = async () => {
+            await connector.deleteTodo(id);
+        }
+        sendDelete();
+        setTodos(todos.filter(todo => todo.id !== id));
+    }
+
+    const updateTodoEvent = (data) => {
+        const sendPut = async () => {
+            await connector.updateTodo(data);
+        }
+        sendPut();
+    }
+
     return (
         <div>
             <h3>{day}</h3>
@@ -36,7 +51,14 @@ function Day({ day, todosFetched }) {
                     {
                         todos.length !== 0 ? ( 
                             todos.map(todo => (
-                                <Task key={todo.id} order={todo.order} task={todo.task} done={todo.done} />
+                                <Task key={todo.id} 
+                                    id={todo.id} 
+                                    order={todo.order} 
+                                    task={todo.task} 
+                                    done={todo.done} 
+                                    deleteTodoEvent={deleteTodoEvent}
+                                    updateTodoEvent={updateTodoEvent}
+                                />
                             ))
                         ) : (
                             <p>{noTasksText}</p>

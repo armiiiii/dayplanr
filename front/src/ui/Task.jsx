@@ -1,6 +1,9 @@
 import { useState } from "react";
 
 function Task(props) {
+    const id = props.id;
+    const deleteTodoEvent = props.deleteTodoEvent;
+    const updateTodoEvent = props.updateTodoEvent;
     const [editing, setEditing] = useState(false);
 
     const [order, setOrder] = useState(props.order);
@@ -20,14 +23,21 @@ function Task(props) {
                         <div>
                             <button onClick={() => {setDone(!done)}}>Done</button>
                             <button onClick={() => {setEditing(true)}}>Edit</button>
-                            <button>Delete</button>
+                            <button onClick={() => {deleteTodoEvent(id)}}>Delete</button>
                         </div>
                     </>
                 ) : (
                     <>
                         <input onChange={(e) => {setOrder(e.target.value)}} value={order} name="order" type="number"/>
                         <input onChange={(e) => {setTask(e.target.value)}} value={task} name="order" type="text"/>
-                        <input type="submit"/>
+                        <input onClick={() => {updateTodoEvent({
+                                    "id": id, 
+                                    "order": order, 
+                                    "task": task, 
+                                    "done": done
+                                })}} 
+                            type="submit"
+                        />
                         <button onClick={() => {setEditing(false)}}>Stop editing</button>
                     </>
                 )}
