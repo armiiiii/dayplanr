@@ -11,7 +11,7 @@ function Day({ day, todosFetched }) {
     const noTasksText = "No todos for today, want to create?:)";
     const formRef = useRef(null);
 
-    const createTodoFormCallEvent = (e) => {
+    const createTodoFormCallEvent = () => {
         formRef.current.style.display = 'contents'
     }
 
