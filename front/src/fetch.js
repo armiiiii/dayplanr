@@ -9,12 +9,12 @@ const connector = {
         const response = await axios.post('http://localhost:8000/todos/', data, {withCredentials:true});
         return response.data;
     },
-    updateTodo: async (data) => {
-        const response = await axios.put('http://localhost:8000/todos/', data, {withCredentials: true})
+    updateTodo: async (id, data) => {
+        const response = await axios.put(`http://localhost:8000/todos/${id}`, data, {withCredentials: true})
         return response.data;
     },
     deleteTodo: async (id) => {
-        await axios.delete("http://localhost:8000/todos/", {"id": id}, {withCredentials: true})
+        await axios.delete(`http://localhost:8000/todos/${id}`, {withCredentials: true})
     }
 };
 

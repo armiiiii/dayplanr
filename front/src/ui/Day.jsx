@@ -21,7 +21,8 @@ function Day({ day, todosFetched }) {
 
     const createTodoEvent = (data) => { // update state of todos list dynamicly
         const sendRequest = async () => {
-            setTodos(await connector.createTodo(JSON.stringify(data)));
+            const newTodo = await connector.createTodo(JSON.stringify(data));
+            setTodos(prevTodos => [...prevTodos, newTodo]);
 
         }
         createTodoFormCloseEvent();
@@ -37,8 +38,9 @@ function Day({ day, todosFetched }) {
     }
 
     const updateTodoEvent = (data) => {
+        const body = {...data, "day": day}
         const sendPut = async () => {
-            await connector.updateTodo(data);
+            await connector.updateTodo(body.id, body);
         }
         sendPut();
     }

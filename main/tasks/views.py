@@ -21,25 +21,25 @@ def get_week(request):
     return JsonResponse(week, safe=False)
 
 
-def todos_index(request):
-    print(request.META)
-    DATA = JSONParser().parse(request)
-    if request.method == 'POST':
-        serializer = TaskSerializer(data=DATA)
+def create_todo(request):
+    data = JSONParser().parse(request)
+    serializer = TaskSerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return JsonResponse(serializer.data, status=status.HTTP_201_CREATED, safe=False)
+    return JsonResponse(status=status.HTTP_406_NOT_ACCEPTABLE)
+
+
+def update_delete_todo(request, id):
+    if request.method == 'PUT':
+        data = JSONParser().parse(request)
+        task = Task.objects.get(id=id)
+        serializer = TaskSerializer(task, data=data)
         if serializer.is_valid():
             serializer.save()
-            serializer = TaskSerializer(Task.objects.filter(day=DATA.get("day")).order_by("order"), many=True)
-            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED, safe=False)
-        return JsonResponse(status=status.HTTP_406_NOT_ACCEPTABLE)
-    elif request.method == 'PUT':
-        task = Task.objects.get(data=DATA.id)
-        serializer = TaskSerializer(task, data=DATA)
-        if serializer.is_valid():
-            serializer.save()
-            serializer = TaskSerializer(Task.objects.filter(DATA.get("day")).order_by("order"), many=True)
-            return JsonResponse(serializer.data, status=status.HTTP_202_ACCEPTED, safe=False)
-    else:
-        task = Task.objects.get(data=DATA.id)
+            return JsonResponse("", status=status.HTTP_202_ACCEPTED, safe=False)
+    elif request.method == 'DELETE':
+        task = Task.objects.get(id=id)
         task.delete()
-        serializer = TaskSerializer(Task.objects.filter(DATA.get('day')).order_by("order"), many=True)
-        return JsonResponse(serializer.data, status=status.HTTP_200_OK, safe=False)
+        return JsonResponse("", status=status.HTTP_204_NO_CONTENT, safe=False)
+    return JsonResponse("Something went wrong", status=status.HTTP_400_BAD_REQUEST, safe=False)

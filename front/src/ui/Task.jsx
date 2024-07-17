@@ -30,12 +30,15 @@ function Task(props) {
                     <>
                         <input onChange={(e) => {setOrder(e.target.value)}} value={order} name="order" type="number"/>
                         <input onChange={(e) => {setTask(e.target.value)}} value={task} name="order" type="text"/>
-                        <input onClick={() => {updateTodoEvent({
-                                    "id": id, 
+                        <input onClick={() => {
+                                updateTodoEvent({
+                                    "id": id,
                                     "order": order, 
                                     "task": task, 
                                     "done": done
-                                })}} 
+                                });
+                                setEditing(false);
+                            }} 
                             type="submit"
                         />
                         <button onClick={() => {setEditing(false)}}>Stop editing</button>
