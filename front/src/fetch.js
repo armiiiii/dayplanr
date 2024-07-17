@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const connector = {
     getWeek: async () => {
-        const response = await axios.get('http://localhost:8000/', {withCredentials: true});
+        const response = await axios.get('http://localhost:8000/todos/', {withCredentials: true});
         return response.data;
     },
     createTodo: async (data) => {
@@ -10,11 +10,11 @@ const connector = {
         return response.data;
     },
     updateTodo: async (id, data) => {
-        const response = await axios.put(`http://localhost:8000/todos/${id}`, data, {withCredentials: true})
+        const response = await axios.put(`http://localhost:8000/todos/${id}/`, data, {withCredentials: true})
         return response.data;
     },
     deleteTodo: async (id) => {
-        await axios.delete(`http://localhost:8000/todos/${id}`, {withCredentials: true})
+        await axios.delete(`http://localhost:8000/todos/${id}/`, {withCredentials: true})
     }
 };
 

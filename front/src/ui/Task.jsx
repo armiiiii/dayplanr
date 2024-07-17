@@ -1,14 +1,17 @@
 import { useState } from "react";
 
 function Task(props) {
-    const id = props.id;
-    const deleteTodoEvent = props.deleteTodoEvent;
-    const updateTodoEvent = props.updateTodoEvent;
     const [editing, setEditing] = useState(false);
 
     const [order, setOrder] = useState(props.order);
     const [task, setTask] = useState(props.task);
     const [done, setDone] = useState(props.done);
+    // const [data, setData] = useState({
+    //     "id": props.id,
+    //     "order": props.order,
+    //     "task": props.task,
+    //     "done": props.done,
+    // })
 
     return (
     <div>
@@ -21,9 +24,19 @@ function Task(props) {
                             <p style={ done ? ({textDecoration: 'line-through'}) : ({})}>{ task }</p>
                         </div>
                         <div>
-                            <button onClick={() => {setDone(!done)}}>Done</button>
+                            <button onClick={() => {
+                                props.updateTodoEvent({
+                                    "id": props.id,
+                                    "order": order, 
+                                    "task": task, 
+                                    "done": !done,
+                                });
+                                setDone(!done);
+                            }}>
+                                Done
+                            </button>
                             <button onClick={() => {setEditing(true)}}>Edit</button>
-                            <button onClick={() => {deleteTodoEvent(id)}}>Delete</button>
+                            <button onClick={() => {props.deleteTodoEvent(props.id)}}>Delete</button>
                         </div>
                     </>
                 ) : (
@@ -31,8 +44,8 @@ function Task(props) {
                         <input onChange={(e) => {setOrder(e.target.value)}} value={order} name="order" type="number"/>
                         <input onChange={(e) => {setTask(e.target.value)}} value={task} name="order" type="text"/>
                         <input onClick={() => {
-                                updateTodoEvent({
-                                    "id": id,
+                                props.updateTodoEvent({
+                                    "id": props.id,
                                     "order": order, 
                                     "task": task, 
                                     "done": done

@@ -23,7 +23,6 @@ function Day({ day, todosFetched }) {
         const sendRequest = async () => {
             const newTodo = await connector.createTodo(JSON.stringify(data));
             setTodos(prevTodos => [...prevTodos, newTodo]);
-
         }
         createTodoFormCloseEvent();
         sendRequest();
