@@ -11,20 +11,20 @@ function Day({ day, todosFetched }) {
     const noTasksText = "No todos for today, want to create?:)";
     const formRef = useRef(null);
 
-    const createTodoFormCallEvent = () => {
-        formRef.current.style.display = 'contents'
-    }
-
-    const createTodoFormCloseEvent = () => {
-        formRef.current.style.display = 'none'
+    const createTodoFormEvent = () => {
+        if (formRef.current.style.display === 'none') {
+            formRef.current.style.display = 'contents'
+        } else {
+            formRef.current.style.display = 'none'
+        }
     }
 
     const createTodoEvent = (data) => { // update state of todos list dynamicly
         const sendRequest = async () => {
-            const newTodo = await connector.post(JSON.stringify(data));
+            const newTodo = await connector.post(data);
             setTodos(prevTodos => [...prevTodos, newTodo]);
         }
-        createTodoFormCloseEvent();
+        createTodoFormEvent();
         sendRequest();
     }
 
@@ -67,11 +67,11 @@ function Day({ day, todosFetched }) {
                     }
                 </div>
                 <div>
-                    <button onClick={createTodoFormCallEvent}>Create Todo</button>
+                    <button onClick={createTodoFormEvent}>Create Todo</button>
                 </div>
             </div>
             <div ref={formRef} style={{backgroundColor: 'lightblue', zIndex: "1", display: 'none' }}>
-                <button onClick={createTodoFormCloseEvent}>Close</button>
+                <button onClick={createTodoFormEvent}>Close</button>
                 <CreateTodoForm day={day} createTodo={createTodoEvent} />
             </div>
         </div>
