@@ -1,20 +1,30 @@
 import axios from 'axios';
 
+const url = 'http://localhost:8000/todos/';
+
+const sendRequest = async (url, data, method) => {
+    const response= await axios({
+        method: method,
+        url: url,
+        data: data,
+        withCredentials: true,
+        responseType: 'json',
+    });
+    return response.data;
+}
+
 const connector = {
-    getWeek: async () => {
-        const response = await axios.get('http://localhost:8000/todos/', {withCredentials: true});
-        return response.data;
+    get: async () => {
+        return await sendRequest(url, {}, 'get');
     },
-    createTodo: async (data) => {
-        const response = await axios.post('http://localhost:8000/todos/', data, {withCredentials:true});
-        return response.data;
+    post: async (data) => {
+        return await sendRequest(url, data, 'post');
     },
-    updateTodo: async (id, data) => {
-        const response = await axios.put(`http://localhost:8000/todos/${id}/`, data, {withCredentials: true})
-        return response.data;
+    put: async (id, data) => {
+        return await sendRequest(url+`${id}/`, data, 'put');
     },
-    deleteTodo: async (id) => {
-        await axios.delete(`http://localhost:8000/todos/${id}/`, {withCredentials: true})
+    delete: async (id) => {
+        return await sendRequest(url+`${id}/`, {}, 'delete')
     }
 };
 

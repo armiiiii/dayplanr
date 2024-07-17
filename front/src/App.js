@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await connector.getWeek();
+      const data = await connector.get();
       setWeek(data);
     }
     fetchData();

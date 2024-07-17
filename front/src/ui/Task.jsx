@@ -6,12 +6,6 @@ function Task(props) {
     const [order, setOrder] = useState(props.order);
     const [task, setTask] = useState(props.task);
     const [done, setDone] = useState(props.done);
-    // const [data, setData] = useState({
-    //     "id": props.id,
-    //     "order": props.order,
-    //     "task": props.task,
-    //     "done": props.done,
-    // })
 
     return (
     <div>
@@ -48,7 +42,7 @@ function Task(props) {
                                     "id": props.id,
                                     "order": order, 
                                     "task": task, 
-                                    "done": done
+                                    "done": done,
                                 });
                                 setEditing(false);
                             }} 

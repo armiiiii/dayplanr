@@ -33,7 +33,6 @@ class TODOApiView(APIView):
     def put(self, request, id, format=None):
         data = JSONParser().parse(request)
         task = Task.objects.get(id=id)
-        print(data)
         serializer = TaskSerializer(task, data=data)
         if serializer.is_valid():
             serializer.save()
